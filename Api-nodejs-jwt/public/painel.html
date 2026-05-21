@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Painel de Logs</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    body{
+      background:#f5f7fb;
+    }
+
+    .titulo{
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .card-log{
+      border:none;
+      border-radius:16px;
+      transition:.2s;
+      cursor:pointer;
+    }
+
+    .card-log:hover{
+      transform:translateY(-2px);
+    }
+
+    .cpf{
+      font-size:18px;
+      font-weight:bold;
+      word-break:break-word;
+    }
+
+    .info{
+      font-size:14px;
+      margin-bottom:4px;
+      word-break:break-word;
+    }
+
+    .modal-overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      z-index:999;
+      padding:15px;
+      overflow:auto;
+    }
+
+    .modal-box{
+      background:#fff;
+      border-radius:18px;
+      padding:20px;
+      width:100%;
+      max-width:700px;
+      margin:auto;
+      margin-top:40px;
+    }
+
+    .detalhes{
+      background:#f1f3f5;
+      padding:15px;
+      border-radius:10px;
+      max-height:400px;
+      overflow:auto;
+      font-size:13px;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    @media(max-width:768px){
+
+      .titulo{
+        font-size:22px;
+      }
+
+      .card-log{
+        padding:15px;
+      }
+
+      .cpf{
+        font-size:16px;
+      }
+
+      .info{
+        font-size:13px;
+      }
+
+      .modal-box{
+        padding:15px;
+        border-radius:14px;
+      }
+
+      .detalhes{
+        font-size:12px;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h3 class="titulo mb-0">
+      📊 Painel de Logs
+    </h3>
+
+  </div>
+
+  <div id="logs" class="row"></div>
+
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal-overlay">
+
+  <div class="modal-box">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+      <h5 class="mb-0">
+        Detalhes do Log
+      </h5>
+
+      <button
+        class="btn btn-sm btn-danger"
+        onclick="fecharModal()"
+      >
+        Fechar
+      </button>
+
+    </div>
+
+    <div id="detalhes" class="detalhes"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+async function carregarLogs() {
+
+  try {
+
+    const res = await fetch("http://localhost:8000/logs");
+
+    const data = await res.json();
+
+    const container = document.getElementById("logs");
+
+    container.innerHTML = "";
+
+    if(!data.length){
+
+      container.innerHTML = `
+        <div class="col-12">
+          <div class="alert alert-secondary">
+            Nenhum log encontrado
+          </div>
+        </div>
+      `;
+
+      return;
+    }
+
+    data.forEach(log => {
+
+      const col = document.createElement("div");
+
+      col.className = "col-12 col-sm-6 col-lg-4 mb-3";
+
+      col.innerHTML = `
+        <div class="card card-log shadow-sm h-100">
+
+          <div class="card-body">
+
+            <div class="cpf mb-2">
+              CPF: ${log.cpf || "-"}
+            </div>
+
+            <div class="info">
+              <strong>IP:</strong>
+              ${log.ip || "N/A"}
+            </div>
+
+            <div class="info">
+              <strong>Cidade:</strong>
+              ${log.localizacao?.cidade || "-"}
+            </div>
+
+            <div class="info">
+              <strong>Estado:</strong>
+              ${log.localizacao?.estado || "-"}
+            </div>
+
+            <div class="info">
+              <strong>Total:</strong>
+              ${log.totalTentativas || 0}
+            </div>
+
+            <button class="btn btn-outline-primary btn-sm mt-3">
+              Ver detalhes
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+      col.onclick = () => abrirModal(log);
+
+      container.appendChild(col);
+
+    });
+
+  } catch(err){
+
+    console.log(err);
+
+  }
+
+}
+
+function abrirModal(log) {
+
+  document.getElementById("detalhes").innerText =
+    JSON.stringify(log, null, 2);
+
+  document.getElementById("modal").style.display = "block";
+}
+
+function fecharModal() {
+
+  document.getElementById("modal").style.display = "none";
+}
+
+window.onclick = function(e){
+
+  const modal = document.getElementById("modal");
+
+  if(e.target === modal){
+    fecharModal();
+  }
+
+}
+
+carregarLogs();
+
+</script>
+
+</body>
+</html>

